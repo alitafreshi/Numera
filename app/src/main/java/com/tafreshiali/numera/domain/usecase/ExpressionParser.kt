@@ -14,9 +14,9 @@ class ExpressionParser(private val calculation: String) {
         while (currentIndex < calculation.length) {
             val currentCharacter = calculation[currentIndex]
             when {
-                currentCharacter in operationsSymbols -> {
+                currentCharacter in operationsSymbols ->
                     result.add(ExpressionPart.Op(currentCharacter.operationFromSymbol()))
-                }
+
 
                 currentCharacter.isDigit() -> {
                     val (number, newIndex) = parseNumber(currentIndex)
@@ -25,9 +25,8 @@ class ExpressionParser(private val calculation: String) {
                     continue
                 }
 
-                currentCharacter in "()" -> {
-                    result.add(parseParentheses(currentCharacter))
-                }
+                currentCharacter in "()" -> result.add(parseParentheses(currentCharacter))
+
             }
             currentIndex++
         }
@@ -48,12 +47,36 @@ class ExpressionParser(private val calculation: String) {
                         dotCount++
                         append(char)
                     }
+
                     else -> break
                 }
                 currentIndex++
             }
         }
 
+        return ExpressionPart.Number(numberAsString.toDouble()) to currentIndex
+    }
+
+
+
+    private fun parseNumberV2(startingIndex: Int): Pair<ExpressionPart.Number, Int> {
+        var currentIndex = startingIndex
+        var dotCount = 0
+
+        while (currentIndex < calculation.length) {
+            val char = calculation[currentIndex]
+            when {
+                char.isDigit() -> currentIndex++
+                char == '.' -> {
+                    if (dotCount == 1) throw IllegalArgumentException("Decimal number with Multiple decimal points is invalid")  // Stop if multiple decimal points appear
+                    dotCount++
+                    currentIndex++
+                }
+                else -> break
+            }
+        }
+
+        val numberAsString = calculation.substring(startingIndex, currentIndex)
         return ExpressionPart.Number(numberAsString.toDouble()) to currentIndex
     }
 
