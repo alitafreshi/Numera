@@ -37,37 +37,11 @@ class ExpressionParser(private val calculation: String) {
         var currentIndex = startingIndex
         var dotCount = 0
 
-        val numberAsString = buildString {
-            while (currentIndex < calculation.length) {
-                val char = calculation[currentIndex]
-                when {
-                    char.isDigit() -> append(char)
-                    char == '.' -> {
-                        if (dotCount == 1) break // Stop if multiple decimal points appear
-                        dotCount++
-                        append(char)
-                    }
-
-                    else -> break
-                }
-                currentIndex++
-            }
-        }
-
-        return ExpressionPart.Number(numberAsString.toDouble()) to currentIndex
-    }
-
-
-
-    private fun parseNumberV2(startingIndex: Int): Pair<ExpressionPart.Number, Int> {
-        var currentIndex = startingIndex
-        var dotCount = 0
-
         while (currentIndex < calculation.length) {
-            val char = calculation[currentIndex]
+            val currentCharacter = calculation[currentIndex]
             when {
-                char.isDigit() -> currentIndex++
-                char == '.' -> {
+                currentCharacter.isDigit() -> currentIndex++
+                currentCharacter == '.' -> {
                     if (dotCount == 1) throw IllegalArgumentException("Decimal number with Multiple decimal points is invalid")  // Stop if multiple decimal points appear
                     dotCount++
                     currentIndex++
