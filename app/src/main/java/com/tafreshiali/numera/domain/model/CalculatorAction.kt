@@ -1,6 +1,4 @@
-package com.tafreshiali.numera.ui.model
-
-import com.tafreshiali.numera.domain.model.Operation
+package com.tafreshiali.numera.domain.model
 
 sealed interface CalculatorAction {
     data class Number(val number: Int) : CalculatorAction

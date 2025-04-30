@@ -2,7 +2,7 @@ package com.tafreshiali.numera.domain.usecase
 
 import com.google.common.truth.Truth.assertThat
 import com.tafreshiali.numera.domain.model.Operation
-import com.tafreshiali.numera.ui.model.CalculatorAction
+import com.tafreshiali.numera.domain.model.CalculatorAction
 import org.junit.Before
 import org.junit.Test
 

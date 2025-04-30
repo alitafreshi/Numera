@@ -2,7 +2,7 @@ package com.tafreshiali.numera.domain.usecase
 
 import com.tafreshiali.numera.domain.model.Operation
 import com.tafreshiali.numera.domain.model.operationSymbols
-import com.tafreshiali.numera.ui.model.CalculatorAction
+import com.tafreshiali.numera.domain.model.CalculatorAction
 
 class ExpressionWriter {
 
