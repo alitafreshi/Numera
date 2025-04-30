@@ -2,10 +2,19 @@ package com.tafreshiali.numera.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+//LIGHT THEME COLORS
+val colorLightSurface = Color(0xFFF1F2F3)
+val colorLightOnSurfacePrimary = Color(0xFF000000)
+val colorLightOnSurfaceSecondary = Color(0x66000000)
+val colorLightHighEmphasisSurface = Color(0xFF4B5EFC)
+val colorLightHighEmphasisOnSurface = Color(0xFFFFFFFF)
+val colorLightMediumEmphasisSurface = Color(0xFFD2D3DA)
+val colorLightLowEmphasisSurface = Color(0xFFFFFFFF)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+//DARK THEME COLORS
+val colorDarkSurface = Color(0xFF17171C)
+val colorDarkOnSurfacePrimary = Color(0xFFFFFFFF)
+val colorDarkOnSurfaceSecondary = Color(0x66FFFFFF)
+val colorDarkHighEmphasisSurface = Color(0xFF4B5EFC)
+val colorDarkMediumEmphasisSurface = Color(0xFF4E505F)
+val colorDarkLowEmphasisSurface = Color(0xFF2E2F38)
