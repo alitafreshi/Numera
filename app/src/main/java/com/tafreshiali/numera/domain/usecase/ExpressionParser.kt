@@ -3,7 +3,7 @@ package com.tafreshiali.numera.domain.usecase
 import com.tafreshiali.numera.domain.model.ExpressionPart
 import com.tafreshiali.numera.domain.model.ParenthesesType
 import com.tafreshiali.numera.domain.model.operationFromSymbol
-import com.tafreshiali.numera.domain.model.operationsSymbols
+import com.tafreshiali.numera.domain.model.operationSymbols
 
 class ExpressionParser(private val calculation: String) {
 
@@ -14,7 +14,7 @@ class ExpressionParser(private val calculation: String) {
         while (currentIndex < calculation.length) {
             val currentCharacter = calculation[currentIndex]
             when {
-                currentCharacter in operationsSymbols ->
+                currentCharacter in operationSymbols ->
                     result.add(ExpressionPart.Op(currentCharacter.operationFromSymbol()))
 
 
