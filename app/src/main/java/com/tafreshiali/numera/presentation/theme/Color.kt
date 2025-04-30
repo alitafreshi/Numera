@@ -1,4 +1,4 @@
-package com.tafreshiali.numera.ui.theme
+package com.tafreshiali.numera.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
