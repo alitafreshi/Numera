@@ -47,6 +47,11 @@ private val lightColorSchema = AppColorSchema(
 )
 
 private val typography = AppTypography(
+    light25 = TextStyle(
+        fontFamily = workSans,
+        fontWeight = FontWeight.Light,
+        fontSize = 25.sp
+    ),
     light40 = TextStyle(
         fontFamily = workSans,
         fontWeight = FontWeight.Light,

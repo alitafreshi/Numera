@@ -9,7 +9,7 @@ import com.tafreshiali.numera.domain.usecase.ExpressionWriter
 
 class CalculatorViewModel(private val writer: ExpressionWriter = ExpressionWriter()) : ViewModel() {
 
-    var previousExpression by mutableStateOf("")
+    var result by mutableStateOf("")
         private set
 
     var expression by mutableStateOf("")
@@ -17,7 +17,7 @@ class CalculatorViewModel(private val writer: ExpressionWriter = ExpressionWrite
 
     fun onAction(action: CalculatorAction) {
         writer.processAction(action)
-        this.expression = writer.expression
+        expression = writer.expression
+        result = writer.calculationResult
     }
-
 }

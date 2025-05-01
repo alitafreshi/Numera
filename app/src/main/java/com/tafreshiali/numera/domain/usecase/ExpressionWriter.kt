@@ -7,44 +7,62 @@ import com.tafreshiali.numera.domain.model.CalculatorAction
 class ExpressionWriter {
 
     var expression = ""
+    var calculationResult = ""
 
     fun processAction(action: CalculatorAction) {
-        when(action) {
+        when (action) {
             CalculatorAction.Calculate -> {
-                val parser = ExpressionParser(prepareForCalculation())
-                val evaluator = ExpressionEvaluator(parser.parse())
-                expression = evaluator.evaluate().toString()
+                if (calculationResult.isNotEmpty()) {
+                    expression = calculationResult
+                    calculationResult = ""
+                }
             }
+
             CalculatorAction.Clear -> {
                 expression = ""
+                calculationResult = ""
             }
+
             CalculatorAction.Decimal -> {
-                if(canEnterDecimal()) {
+                if (canEnterDecimal()) {
                     expression += "."
                 }
             }
+
             CalculatorAction.Delete -> {
                 expression = expression.dropLast(1)
             }
+
             is CalculatorAction.Number -> {
                 expression += action.number
             }
+
             is CalculatorAction.Op -> {
-                if(canEnterOperation(action.operation)) {
+                if (canEnterOperation(action.operation)) {
                     expression += action.operation.symbol
                 }
             }
+
             CalculatorAction.Parentheses -> {
                 processParentheses()
             }
         }
+        if (action != CalculatorAction.Calculate) {
+            calculationResult()
+        }
+    }
+
+    private fun calculationResult() {
+        val parser = ExpressionParser(prepareForCalculation())
+        val evaluator = ExpressionEvaluator(parser.parse())
+        calculationResult = evaluator.evaluate().toString()
     }
 
     private fun prepareForCalculation(): String {
         val newExpression = expression.dropLastWhile {
             it in "$operationSymbols(."
         }
-        if(newExpression.isEmpty()) {
+        if (newExpression.isEmpty()) {
             return "0"
         }
         return newExpression
@@ -56,14 +74,16 @@ class ExpressionWriter {
         expression += when {
             expression.isEmpty() ||
                     expression.last() in "$operationSymbols(" -> "("
+
             expression.last() in "0123456789)" &&
                     openingCount == closingCount -> return
+
             else -> ")"
         }
     }
 
     private fun canEnterDecimal(): Boolean {
-        if(expression.isEmpty() || expression.last() in "$operationSymbols.()") {
+        if (expression.isEmpty() || expression.last() in "$operationSymbols.()") {
             return false
         }
         return !expression.takeLastWhile {
@@ -72,7 +92,7 @@ class ExpressionWriter {
     }
 
     private fun canEnterOperation(operation: Operation): Boolean {
-        if(operation in listOf(Operation.ADD, Operation.SUBTRACT)) {
+        if (operation in listOf(Operation.ADD, Operation.SUBTRACT)) {
             return expression.isEmpty() || expression.last() in "$operationSymbols()0123456789"
         }
         return expression.isNotEmpty() || expression.last() in "0123456789)"

@@ -1,15 +1,18 @@
 package com.tafreshiali.numera.presentation.components
 
+import android.R.attr.text
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 
@@ -17,35 +20,47 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 fun CalculatorDisplay(
     modifier: Modifier = Modifier,
     currentExpression: String,
-    previousExpression: String
+    calculationResult: String
 ) {
     ConstraintLayout(
         modifier = modifier
             .padding(horizontal = 16.dp)
             .wrapContentHeight()
     ) {
-        val (tvPreviousExpression, tvCurrentExpression) = createRefs()
-        Text(
-            text = previousExpression,
-            style = NumeraAppTheme.typography.light40.copy(color = NumeraAppTheme.colorSchema.colorOnSurfaceSecondary),
-            textAlign = TextAlign.End,
-            maxLines = 1,
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(tvPreviousExpression) {
-                    top.linkTo(parent.top)
-                }
-        )
-
+        val currentExpressionFontSize = remember(currentExpression) {
+            if (currentExpression.length <= 12) {
+                40.sp
+            } else {
+                (40 - (currentExpression.length * 0.3f))
+                    .coerceIn(25f, 40f)
+                    .sp
+            }
+        }
+        val (tvCalculationResult, tvCurrentExpression) = createRefs()
         Text(
             text = currentExpression,
-            style = NumeraAppTheme.typography.light96.copy(color = NumeraAppTheme.colorSchema.colorOnSurfacePrimary),
+            style = NumeraAppTheme.typography.light25.copy(
+                fontSize = currentExpressionFontSize,
+                color = NumeraAppTheme.colorSchema.colorOnSurfaceSecondary
+            ),
             textAlign = TextAlign.End,
             maxLines = 1,
             modifier = Modifier
                 .fillMaxWidth()
                 .constrainAs(tvCurrentExpression) {
-                    top.linkTo(tvPreviousExpression.bottom, margin = 16.dp)
+                    top.linkTo(parent.top)
+                }
+        )
+
+        Text(
+            text = calculationResult,
+            style = NumeraAppTheme.typography.light96.copy(color = NumeraAppTheme.colorSchema.colorOnSurfacePrimary),
+            textAlign = TextAlign.End,
+            maxLines = 1,
+            modifier = Modifier
+                .fillMaxWidth()
+                .constrainAs(tvCalculationResult) {
+                    top.linkTo(tvCurrentExpression.bottom, margin = 16.dp)
                 }
         )
     }
@@ -59,8 +74,8 @@ private fun CalculatorDisplayPreview() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.3f),
-            currentExpression = "1,258.2",
-            previousExpression = "6,291÷5"
+            currentExpression = "1,2556546546564444444448.2",
+            calculationResult = "6,291÷5"
         )
     }
 }
