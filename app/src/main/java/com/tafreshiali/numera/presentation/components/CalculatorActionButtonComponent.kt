@@ -1,8 +1,11 @@
 package com.tafreshiali.numera.presentation.components
 
+import android.R.attr.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -10,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.presentation.model.CalculatorUiAction
 import com.tafreshiali.numera.presentation.model.HighlightLevel
@@ -18,28 +22,28 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 @Composable
 fun CalculatorActionButtonComponent(
     modifier: Modifier = Modifier,
-    action: CalculatorUiAction,
-    onClick: () -> Unit
+    uiAction: CalculatorUiAction,
+    onClick: (CalculatorAction) -> Unit
 ) {
     Box(
         modifier = modifier
-            .clip(NumeraAppTheme.shape.medium)
+            .clip(RoundedCornerShape(30.dp))
             .background(
-                color = when (action.highlightLevel) {
+                color = when (uiAction.highlightLevel) {
                     HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisSurface
                     HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisSurface
                     HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisSurface
                 }
             )
-            .clickable { onClick() },
+            .clickable { onClick(uiAction.action) },
         contentAlignment = Alignment.Center
     ) {
         when {
-            action.text != null -> {
+            uiAction.text != null -> {
                 Text(
-                    text = action.text,
+                    text = uiAction.text,
                     style = NumeraAppTheme.typography.regular32,
-                    color = when (action.highlightLevel) {
+                    color = when (uiAction.highlightLevel) {
                         HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisOnSurface
                         HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisOnSurface
                         HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisOnSurface
@@ -48,8 +52,7 @@ fun CalculatorActionButtonComponent(
                     maxLines = 1
                 )
             }
-
-            else -> action.content
+            else -> uiAction.content()
         }
     }
 }
@@ -57,12 +60,17 @@ fun CalculatorActionButtonComponent(
 @Preview
 @Composable
 private fun CalculatorActionButtonComponentPreview() {
-    NumeraAppTheme{
+    NumeraAppTheme {
         CalculatorActionButtonComponent(
-            action = CalculatorUiAction(
-                text = "1",
+            modifier = Modifier
+                .aspectRatio(1f),
+            uiAction = CalculatorUiAction(
+                text = null,
                 highlightLevel = HighlightLevel.LowEmphasis,
-                action = CalculatorAction.Number(1)
+                action = CalculatorAction.Delete,
+                content = {
+                   Text(text = "Delete")
+                }
             ),
             onClick = {}
         )

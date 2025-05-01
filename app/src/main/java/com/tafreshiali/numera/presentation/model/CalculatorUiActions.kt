@@ -6,6 +6,7 @@ import androidx.compose.ui.res.painterResource
 import com.tafreshiali.numera.R
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.model.Operation
+import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 
 val calculatorUiActions = listOf(
     CalculatorUiAction(
@@ -104,7 +105,7 @@ val calculatorUiActions = listOf(
             Icon(
                 painter = painterResource(R.drawable.ic_remove_single_number_32),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = NumeraAppTheme.colorSchema.colorOnSurfacePrimary
             )
         },
         highlightLevel = HighlightLevel.LowEmphasis,

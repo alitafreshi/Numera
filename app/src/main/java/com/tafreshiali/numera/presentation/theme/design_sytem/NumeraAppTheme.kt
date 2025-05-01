@@ -8,31 +8,42 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tafreshiali.numera.presentation.theme.colorDarkHighEmphasisSurface
+import com.tafreshiali.numera.presentation.theme.colorDarkLowEmphasisSurface
+import com.tafreshiali.numera.presentation.theme.colorDarkMediumEmphasisSurface
+import com.tafreshiali.numera.presentation.theme.colorDarkOnSurfacePrimary
+import com.tafreshiali.numera.presentation.theme.colorDarkOnSurfaceSecondary
 import com.tafreshiali.numera.presentation.theme.colorDarkSurface
+import com.tafreshiali.numera.presentation.theme.colorLightHighEmphasisOnSurface
+import com.tafreshiali.numera.presentation.theme.colorLightHighEmphasisSurface
+import com.tafreshiali.numera.presentation.theme.colorLightLowEmphasisSurface
+import com.tafreshiali.numera.presentation.theme.colorLightMediumEmphasisSurface
+import com.tafreshiali.numera.presentation.theme.colorLightOnSurfacePrimary
+import com.tafreshiali.numera.presentation.theme.colorLightOnSurfaceSecondary
 import com.tafreshiali.numera.presentation.theme.colorLightSurface
 
 private val darkColorSchema = AppColorSchema(
     colorSurface = colorDarkSurface,
-    colorOnSurfacePrimary = colorDarkSurface,
-    colorOnSurfaceSecondary = colorDarkSurface,
-    colorHighEmphasisSurface = colorDarkSurface,
-    colorHighEmphasisOnSurface = colorDarkSurface,
-    colorMediumEmphasisSurface = colorDarkSurface,
-    colorMediumEmphasisOnSurface = colorDarkSurface,
-    colorLowEmphasisSurface = colorDarkSurface,
-    colorLowEmphasisOnSurface = colorDarkSurface
+    colorOnSurfacePrimary = colorDarkOnSurfacePrimary,
+    colorOnSurfaceSecondary = colorDarkOnSurfaceSecondary,
+    colorHighEmphasisSurface = colorDarkHighEmphasisSurface,
+    colorHighEmphasisOnSurface = colorDarkOnSurfacePrimary,
+    colorMediumEmphasisSurface = colorDarkMediumEmphasisSurface,
+    colorMediumEmphasisOnSurface = colorDarkOnSurfacePrimary,
+    colorLowEmphasisSurface = colorDarkLowEmphasisSurface,
+    colorLowEmphasisOnSurface = colorDarkOnSurfacePrimary
 )
 
 private val lightColorSchema = AppColorSchema(
     colorSurface = colorLightSurface,
-    colorOnSurfacePrimary = colorLightSurface,
-    colorOnSurfaceSecondary = colorLightSurface,
-    colorHighEmphasisSurface = colorLightSurface,
-    colorHighEmphasisOnSurface = colorLightSurface,
-    colorMediumEmphasisSurface = colorLightSurface,
-    colorMediumEmphasisOnSurface = colorLightSurface,
-    colorLowEmphasisSurface = colorLightSurface,
-    colorLowEmphasisOnSurface = colorLightSurface
+    colorOnSurfacePrimary = colorLightOnSurfacePrimary,
+    colorOnSurfaceSecondary = colorLightOnSurfaceSecondary,
+    colorHighEmphasisSurface = colorLightHighEmphasisSurface,
+    colorHighEmphasisOnSurface = colorLightHighEmphasisOnSurface,
+    colorMediumEmphasisSurface = colorLightMediumEmphasisSurface,
+    colorMediumEmphasisOnSurface = colorLightOnSurfacePrimary,
+    colorLowEmphasisSurface = colorLightLowEmphasisSurface,
+    colorLowEmphasisOnSurface = colorLightOnSurfacePrimary
 )
 
 private val typography = AppTypography(
