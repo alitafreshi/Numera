@@ -55,7 +55,7 @@ private val typography = AppTypography(
 
 private val shape = AppShape(
     medium = RoundedCornerShape(10.dp),
-    large = RoundedCornerShape(20.dp)
+    large = RoundedCornerShape(24.dp)
 )
 
 data object NumeraAppTheme {
