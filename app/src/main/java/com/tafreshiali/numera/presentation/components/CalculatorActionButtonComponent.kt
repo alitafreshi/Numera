@@ -1,6 +1,5 @@
 package com.tafreshiali.numera.presentation.components
 
-import android.R.attr.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -25,34 +24,46 @@ fun CalculatorActionButtonComponent(
     uiAction: CalculatorUiAction,
     onClick: (CalculatorAction) -> Unit
 ) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(30.dp))
-            .background(
-                color = when (uiAction.highlightLevel) {
-                    HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisSurface
-                    HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisSurface
-                    HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisSurface
-                }
-            )
-            .clickable { onClick(uiAction.action) },
-        contentAlignment = Alignment.Center
-    ) {
-        when {
-            uiAction.text != null -> {
-                Text(
-                    text = uiAction.text,
-                    style = NumeraAppTheme.typography.regular32,
-                    color = when (uiAction.highlightLevel) {
-                        HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisOnSurface
-                        HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisOnSurface
-                        HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisOnSurface
-                    },
-                    textAlign = TextAlign.Center,
-                    maxLines = 1
-                )
+    val defaultModifier = modifier
+        .clip(RoundedCornerShape(30.dp))
+        .background(
+            color = when (uiAction.highlightLevel) {
+                HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisSurface
+                HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisSurface
+                HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisSurface
             }
-            else -> uiAction.content()
+        )
+
+    if (uiAction.action == CalculatorAction.Delete) {
+        CalculatorDeleteActionButtonComponent(
+            modifier = defaultModifier,
+            onDeleteClick = { onClick(uiAction.action) },
+            content = uiAction.content
+        )
+
+    } else {
+        Box(
+            modifier = defaultModifier
+                .clickable { onClick(uiAction.action) },
+            contentAlignment = Alignment.Center
+        ) {
+            when {
+                uiAction.text != null -> {
+                    Text(
+                        text = uiAction.text,
+                        style = NumeraAppTheme.typography.regular32,
+                        color = when (uiAction.highlightLevel) {
+                            HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisOnSurface
+                            HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisOnSurface
+                            HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisOnSurface
+                        },
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
+                    )
+                }
+
+                else -> uiAction.content()
+            }
         }
     }
 }
@@ -69,11 +80,10 @@ private fun CalculatorActionButtonComponentPreview() {
                 highlightLevel = HighlightLevel.LowEmphasis,
                 action = CalculatorAction.Delete,
                 content = {
-                   Text(text = "Delete")
+                    Text(text = "Delete")
                 }
             ),
             onClick = {}
         )
     }
-
 }
