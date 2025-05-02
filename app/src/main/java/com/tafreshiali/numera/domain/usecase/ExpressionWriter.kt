@@ -1,8 +1,9 @@
 package com.tafreshiali.numera.domain.usecase
 
+import androidx.core.text.isDigitsOnly
+import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.model.Operation
 import com.tafreshiali.numera.domain.model.operationSymbols
-import com.tafreshiali.numera.domain.model.CalculatorAction
 
 class ExpressionWriter {
 
@@ -47,10 +48,24 @@ class ExpressionWriter {
                 processParentheses()
             }
         }
-        if (action != CalculatorAction.Calculate) {
+        if (isCalculable(action)) {
+            if (!isValidExpression()) {
+                calculationResult = ""
+                return
+            }
             calculationResult()
         }
     }
+
+    private fun isCalculable(currentAction: CalculatorAction): Boolean =
+        (currentAction != CalculatorAction.Calculate || currentAction != CalculatorAction.Clear)
+
+    private fun isValidExpression(): Boolean {
+        val isExpression = !expression.isDigitsOnly()
+        val lastExpressionChar = expression.lastOrNull()
+        return isExpression && (lastExpressionChar != null && lastExpressionChar !in "$operationSymbols(")
+    }
+
 
     private fun calculationResult() {
         val parser = ExpressionParser(prepareForCalculation())
