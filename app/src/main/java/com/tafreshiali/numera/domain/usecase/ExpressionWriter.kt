@@ -80,7 +80,8 @@ class ExpressionWriter {
     }
 
     private fun prepareForCalculation(): String {
-        val newExpression = expression.dropLastWhile {
+        var newExpression = expression.replace(",", "")
+        newExpression = newExpression.dropLastWhile {
             it in "$operationSymbols(."
         }
         if (newExpression.isEmpty()) {

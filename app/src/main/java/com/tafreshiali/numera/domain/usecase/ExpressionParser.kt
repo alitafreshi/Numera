@@ -46,6 +46,7 @@ class ExpressionParser(private val calculation: String) {
                     dotCount++
                     currentIndex++
                 }
+
                 else -> break
             }
         }
