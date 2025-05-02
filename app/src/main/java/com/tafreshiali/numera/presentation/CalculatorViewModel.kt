@@ -20,12 +20,6 @@ class CalculatorViewModel(private val writer: ExpressionWriter = ExpressionWrite
     fun onAction(action: CalculatorAction) {
         writer.processAction(action)
         expression = writer.expression
-        val calculationResult = writer.calculationResult
-        result =
-            calculationResult.ifEmpty { "" } ?: calculationResult.toDouble().formatWithCommas()
-    }
-
-    private fun Double.formatWithCommas(): String {
-        return NumberFormat.getNumberInstance(Locale.US).format(this)
+        result = writer.calculationResult
     }
 }
