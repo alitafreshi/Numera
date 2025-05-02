@@ -18,6 +18,7 @@ class ExpressionWriter {
                 if (calculationResult.isNotEmpty()) {
                     expression = calculationResult
                     calculationResult = ""
+                    return
                 }
             }
 
