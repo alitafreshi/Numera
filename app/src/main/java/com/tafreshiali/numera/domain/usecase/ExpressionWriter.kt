@@ -4,8 +4,6 @@ import androidx.core.text.isDigitsOnly
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.model.Operation
 import com.tafreshiali.numera.domain.model.operationSymbols
-import java.text.NumberFormat
-import java.util.Locale
 
 class ExpressionWriter {
 
@@ -72,11 +70,7 @@ class ExpressionWriter {
     private fun calculationResult() {
         val parser = ExpressionParser(prepareForCalculation())
         val evaluator = ExpressionEvaluator(parser.parse())
-        calculationResult = evaluator.evaluate().formatWithCommas()
-    }
-
-    private fun Double.formatWithCommas(): String {
-        return NumberFormat.getNumberInstance(Locale.US).format(this)
+        calculationResult = evaluator.evaluate().toString()
     }
 
     private fun prepareForCalculation(): String {

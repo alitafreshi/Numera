@@ -24,7 +24,6 @@ fun CalculatorDeleteActionButtonComponent(
 
     LaunchedEffect(isDeleting) {
         if (isDeleting) {
-            onDeleteClick()
             delay(300L)
 
             while (coroutineContext.isActive) {
