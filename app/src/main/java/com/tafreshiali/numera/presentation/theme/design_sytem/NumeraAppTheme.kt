@@ -57,10 +57,10 @@ private val typography = AppTypography(
         fontWeight = FontWeight.Light,
         fontSize = 40.sp
     ),
-    light96 = TextStyle(
+    light36 = TextStyle(
         fontFamily = workSans,
         fontWeight = FontWeight.Light,
-        fontSize = 96.sp
+        fontSize = 36.sp
     ),
     regular32 = TextStyle(
         fontFamily = workSans,

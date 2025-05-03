@@ -70,12 +70,11 @@ class ExpressionWriter {
     private fun calculationResult() {
         val parser = ExpressionParser(prepareForCalculation())
         val evaluator = ExpressionEvaluator(parser.parse())
-        calculationResult = evaluator.evaluate().toString()
+        calculationResult = convertIfWholeNumber(evaluator.evaluate()).toString()
     }
 
     private fun prepareForCalculation(): String {
-        var newExpression = expression.replace(",", "")
-        newExpression = newExpression.dropLastWhile {
+        val newExpression = expression.dropLastWhile {
             it in "$operationSymbols(."
         }
         if (newExpression.isEmpty()) {
@@ -113,4 +112,11 @@ class ExpressionWriter {
         }
         return expression.isNotEmpty() || expression.last() in "0123456789)"
     }
+
+    fun convertIfWholeNumber(value: Double): Any =
+        if (value % 1.0 == 0.0) {
+            value.toInt()
+        } else {
+            value
+        }
 }

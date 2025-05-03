@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
-import com.tafreshiali.numera.presentation.utils.formatWithCommas
 
 @Composable
 fun CalculatorDisplay(
@@ -44,11 +43,7 @@ fun CalculatorDisplay(
         val (tvCalculationResult, tvCurrentExpression) = createRefs()
         TextField(
             value = currentExpression,
-            onValueChange = {
-                if (it.length > 10) {
-
-                }
-            },
+            onValueChange = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .constrainAs(tvCurrentExpression) {
@@ -83,7 +78,7 @@ fun CalculatorDisplay(
             readOnly = true,
             maxLines = 1,
             singleLine = true,
-            textStyle = NumeraAppTheme.typography.light96.copy(
+            textStyle = NumeraAppTheme.typography.light36.copy(
                 color = NumeraAppTheme.colorSchema.colorOnSurfacePrimary,
                 textAlign = TextAlign.End
             ),
@@ -125,7 +120,8 @@ class ArithmeticVisualTransformation : VisualTransformation {
 
         for (token in tokens) {
             if (token.isNumber) {
-                val formatted = token.value.toDouble().formatWithCommas()
+//                val formatted = token.value.toDouble().formatWithCommas()
+               val formatted = formatNumber(token.value)
                 builder.append(formatted)
                 offsetPairs.add(originalIndex to transformedIndex)
                 originalIndex += token.value.length
@@ -160,6 +156,15 @@ class ArithmeticVisualTransformation : VisualTransformation {
         return TransformedText(AnnotatedString(transformedText), offsetMapping)
     }
 
+
+    private fun formatNumber(number: String): String {
+        val parts = number.split(".", limit = 2)
+        val integerPart = parts[0].let {
+            if (it.isEmpty()) "0" else it
+        }.reversed().chunked(3).joinToString(",").reversed()
+        val decimalPart = if (parts.size > 1) "." + parts[1] else if (number.endsWith(".")) "." else ""
+        return integerPart + decimalPart
+    }
 
     private data class Token(val value: String, val isNumber: Boolean)
 
