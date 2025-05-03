@@ -1,5 +1,8 @@
 package com.tafreshiali.numera.presentation.components
 
+import android.R.attr.scaleX
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -7,9 +10,14 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +42,18 @@ fun CalculatorActionButtonComponent(
             }
         )
 
+    var isScaled by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isScaled) 0.75f else 1f,
+        animationSpec = tween(durationMillis = 100),
+        finishedListener = {
+            // Return to normal scale after animation
+            if (isScaled) {
+                isScaled = false
+            }
+        }
+    )
+
     if (uiAction.action == CalculatorAction.Delete) {
         CalculatorDeleteActionButtonComponent(
             modifier = defaultModifier,
@@ -44,7 +64,10 @@ fun CalculatorActionButtonComponent(
     } else {
         Box(
             modifier = defaultModifier
-                .clickable { onClick(uiAction.action) },
+                .clickable {
+                    isScaled = true
+                    onClick(uiAction.action)
+                },
             contentAlignment = Alignment.Center
         ) {
             when {
@@ -58,7 +81,8 @@ fun CalculatorActionButtonComponent(
                             HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisOnSurface
                         },
                         textAlign = TextAlign.Center,
-                        maxLines = 1
+                        maxLines = 1,
+                        modifier = Modifier.graphicsLayer(scaleX = scale, scaleY = scale)
                     )
                 }
 
