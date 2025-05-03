@@ -1,6 +1,5 @@
 package com.tafreshiali.numera.domain.usecase
 
-import androidx.core.text.isDigitsOnly
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.model.Operation
 import com.tafreshiali.numera.domain.model.operationSymbols
@@ -40,8 +39,17 @@ class ExpressionWriter {
             }
 
             is CalculatorAction.Op -> {
-                if (canEnterOperation(action.operation)) {
-                    expression += action.operation.symbol
+                when {
+                    shouldReplaceOperation() -> {
+                        val lastExpressionChar = expression.lastOrNull()
+                        if (lastExpressionChar != action.operation.symbol) {
+                            expression = expression.dropLast(1) + action.operation.symbol
+                        }
+                    }
+
+                    canEnterOperation(action.operation) -> {
+                        expression += action.operation.symbol
+                    }
                 }
             }
 
@@ -62,9 +70,10 @@ class ExpressionWriter {
         (currentAction != CalculatorAction.Calculate || currentAction != CalculatorAction.Clear)
 
     private fun isValidExpression(): Boolean {
-        val isExpression = !expression.isDigitsOnly()
-        val lastExpressionChar = expression.lastOrNull()
-        return isExpression && (lastExpressionChar != null && lastExpressionChar !in "$operationSymbols(")
+        val nonNumeric = expression.replace(Regex("[0-9.]"), "")
+        val isExpression = nonNumeric.isNotEmpty()
+        val lastExpressionChar = expression.lastOrNull() ?: return false
+        return isExpression && (lastExpressionChar !in "$operationSymbols(")
     }
 
     private fun calculationResult() {
@@ -107,10 +116,21 @@ class ExpressionWriter {
     }
 
     private fun canEnterOperation(operation: Operation): Boolean {
-        if (operation in listOf(Operation.ADD, Operation.SUBTRACT)) {
-            return expression.isEmpty() || expression.last() in "$operationSymbols()0123456789"
+        if (expression.isEmpty()) return false
+        val lastExpressionChar = expression.lastOrNull() ?: return false
+        return when {
+            operation in listOf(Operation.ADD, Operation.SUBTRACT) -> {
+                lastExpressionChar in "$operationSymbols()0123456789"
+            }
+
+            else -> lastExpressionChar in "0123456789)"
         }
-        return expression.isNotEmpty() || expression.last() in "0123456789)"
+    }
+
+    private fun shouldReplaceOperation(): Boolean {
+        if (expression.isEmpty()) return false
+        val lastExpressionChar = expression.lastOrNull() ?: return false
+        return lastExpressionChar in operationSymbols
     }
 
     fun convertIfWholeNumber(value: Double): Any =
