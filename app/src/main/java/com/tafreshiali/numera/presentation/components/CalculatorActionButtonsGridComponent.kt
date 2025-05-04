@@ -1,5 +1,6 @@
 package com.tafreshiali.numera.presentation.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.aspectRatio
@@ -46,6 +47,7 @@ fun CalculatorActionButtonsGridComponent(
     }
 }
 
+@Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showSystemUi = true)
 @Composable
 private fun CalculatorActionButtonsGridComponentPreview() {

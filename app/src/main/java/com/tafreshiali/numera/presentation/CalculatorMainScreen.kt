@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tafreshiali.numera.presentation.components.CalculatorActionButtonsGridComponent
@@ -43,7 +44,7 @@ fun CalculatorMainScreen(
     }
 }
 
-@Preview(showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@PreviewLightDark
 @Composable
 private fun CalculatorMainScreenPreview() {
     NumeraAppTheme {
