@@ -187,6 +187,17 @@ class CalculatorActionButtonComponentKtTest {
 
     @Test
     fun checkTheMultiplicationCalculationResultIsCorrect() {
+        composeTestRule.onNodeWithContentDescription(label = "10").performClick()
+        composeTestRule.onNodeWithContentDescription(label = "tvCurrentExpression")
+            .assertTextEquals("10")
+        composeTestRule.onNodeWithContentDescription(label = "x").performClick()
+        composeTestRule.onNodeWithContentDescription(label = "tvCurrentExpression")
+            .assertTextEquals("10x")
 
+        composeTestRule.onNodeWithContentDescription(label = "2").performClick()
+        composeTestRule.onNodeWithContentDescription(label = "tvCurrentExpression")
+            .assertTextEquals("10x2")
+        composeTestRule.onNodeWithContentDescription(label = "tvCalculationResult")
+            .assertTextEquals("20")
     }
 }
