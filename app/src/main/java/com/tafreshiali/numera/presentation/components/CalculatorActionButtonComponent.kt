@@ -1,6 +1,5 @@
 package com.tafreshiali.numera.presentation.components
 
-import android.R.attr.scaleX
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -18,6 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +43,17 @@ fun CalculatorActionButtonComponent(
                 HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisSurface
             }
         )
+        .semantics {
+            contentDescription = when (uiAction.action) {
+                is CalculatorAction.Number -> uiAction.action.number.toString()
+                is CalculatorAction.Op -> uiAction.action.operation.symbol.toString()
+                CalculatorAction.Calculate -> uiAction.text.orEmpty()
+                CalculatorAction.Clear -> uiAction.text.orEmpty()
+                CalculatorAction.Decimal -> uiAction.text.orEmpty()
+                CalculatorAction.Delete -> uiAction.text.orEmpty()
+                CalculatorAction.Parentheses -> uiAction.text.orEmpty()
+            }
+        }
 
     var isScaled by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(

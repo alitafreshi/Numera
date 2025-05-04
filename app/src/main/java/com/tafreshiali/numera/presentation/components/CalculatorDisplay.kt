@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
@@ -48,6 +50,9 @@ fun CalculatorDisplay(
                 .fillMaxWidth()
                 .constrainAs(tvCurrentExpression) {
                     top.linkTo(parent.top)
+                }
+                .semantics {
+                    contentDescription = "tvCurrentExpression"
                 },
             readOnly = true,
             textStyle = NumeraAppTheme.typography.light25.copy(
@@ -74,6 +79,9 @@ fun CalculatorDisplay(
                 .fillMaxWidth()
                 .constrainAs(tvCalculationResult) {
                     top.linkTo(tvCurrentExpression.bottom, margin = 16.dp)
+                }
+                .semantics {
+                    contentDescription = "tvCalculationResult"
                 },
             readOnly = true,
             maxLines = 1,
@@ -120,8 +128,7 @@ class ArithmeticVisualTransformation : VisualTransformation {
 
         for (token in tokens) {
             if (token.isNumber) {
-//                val formatted = token.value.toDouble().formatWithCommas()
-               val formatted = formatNumber(token.value)
+                val formatted = formatNumber(token.value)
                 builder.append(formatted)
                 offsetPairs.add(originalIndex to transformedIndex)
                 originalIndex += token.value.length
@@ -162,7 +169,8 @@ class ArithmeticVisualTransformation : VisualTransformation {
         val integerPart = parts[0].let {
             if (it.isEmpty()) "0" else it
         }.reversed().chunked(3).joinToString(",").reversed()
-        val decimalPart = if (parts.size > 1) "." + parts[1] else if (number.endsWith(".")) "." else ""
+        val decimalPart =
+            if (parts.size > 1) "." + parts[1] else if (number.endsWith(".")) "." else ""
         return integerPart + decimalPart
     }
 
