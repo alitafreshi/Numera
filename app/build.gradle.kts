@@ -62,4 +62,7 @@ dependencies {
 
     //google truth
     testImplementation(libs.google.truth)
+
+    //splash screen
+    implementation(libs.androidx.core.splashscreen)
 }
