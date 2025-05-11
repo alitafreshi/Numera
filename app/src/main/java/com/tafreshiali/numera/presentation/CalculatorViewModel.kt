@@ -6,8 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.usecase.ExpressionWriter
-import java.text.NumberFormat
-import java.util.Locale
 
 class CalculatorViewModel(private val writer: ExpressionWriter = ExpressionWriter()) : ViewModel() {
 

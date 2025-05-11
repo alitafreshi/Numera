@@ -5,23 +5,22 @@ import com.tafreshiali.numera.domain.model.ExpressionPart
 import com.tafreshiali.numera.domain.model.Operation
 import org.junit.Test
 
-
 class ExpressionEvaluatorTest {
     private lateinit var evaluator: ExpressionEvaluator
 
     @Test
     fun `simple expression is properly evaluated`() {
-        //Given
+        // Given
         evaluator = ExpressionEvaluator(
             listOf(
                 ExpressionPart.Number(3.0),
                 ExpressionPart.Op(Operation.ADD),
-                ExpressionPart.Number(5.0)
-            )
+                ExpressionPart.Number(5.0),
+            ),
         )
-        //When
+        // When
         val actual = evaluator.evaluate()
-        //Then
+        // Then
         val expected = 8.0
         assertThat(expected).isEqualTo(actual)
     }

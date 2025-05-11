@@ -5,10 +5,10 @@ enum class Operation(val symbol: Char) {
     SUBTRACT(symbol = '-'),
     MULTIPLY(symbol = 'x'),
     DIVIDE(symbol = '÷'),
-    PERCENT(symbol = '%')
+    PERCENT(symbol = '%'),
 }
 
 val operationSymbols = Operation.entries.map { it.symbol }.joinToString("")
 
-fun Char.operationFromSymbol(): Operation =
-    Operation.entries.find { it.symbol == this } ?: throw IllegalArgumentException("Invalid symbol")
+fun Char.operationFromSymbol(): Operation = Operation.entries.find { it.symbol == this }
+    ?: throw IllegalArgumentException("Invalid symbol")

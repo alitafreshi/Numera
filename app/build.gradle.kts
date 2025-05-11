@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias { libs.plugins.ktlint }
 }
 
 android {
@@ -36,6 +37,25 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        ktlint("1.5.0")
+            .editorConfigOverride(
+                mapOf(
+                    /* "indent_size" to "4",
+                     "continuation_indent_size" to "4",*/
+                    "remove_unused_imports" to "true",
+                    "ktlint_standard_annotation" to "disabled",
+                    "max_line_length" to "100",
+                    "ktlint_standard_no-wildcard-imports" to "disabled",
+                    "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
+                    "ktlint_standard_package-name" to "disabled"
+                )
+            )
     }
 }
 

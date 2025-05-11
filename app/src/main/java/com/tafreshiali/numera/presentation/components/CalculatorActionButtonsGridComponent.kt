@@ -22,7 +22,7 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 fun CalculatorActionButtonsGridComponent(
     modifier: Modifier = Modifier,
     actions: List<CalculatorUiAction>,
-    onActionClick: (CalculatorAction) -> Unit
+    onActionClick: (CalculatorAction) -> Unit,
 ) {
     FlowRow(
         modifier = modifier
@@ -31,7 +31,7 @@ fun CalculatorActionButtonsGridComponent(
             .wrapContentHeight(Alignment.CenterVertically),
         maxItemsInEachRow = 4,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         val itemModifier = Modifier
             .aspectRatio(1f)
@@ -41,7 +41,7 @@ fun CalculatorActionButtonsGridComponent(
             CalculatorActionButtonComponent(
                 modifier = itemModifier,
                 uiAction = actions[index],
-                onClick = onActionClick
+                onClick = onActionClick,
             )
         }
     }
@@ -57,7 +57,7 @@ private fun CalculatorActionButtonsGridComponentPreview() {
                 .fillMaxWidth()
                 .fillMaxHeight(0.7f),
             actions = calculatorUiActions,
-            onActionClick = {}
+            onActionClick = {},
         )
     }
 }

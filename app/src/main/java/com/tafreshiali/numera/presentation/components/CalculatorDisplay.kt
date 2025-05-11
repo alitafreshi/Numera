@@ -26,7 +26,7 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 fun CalculatorDisplay(
     modifier: Modifier = Modifier,
     currentExpression: String,
-    calculationResult: String
+    calculationResult: String,
 ) {
     val currentExpressionFontSize = remember(currentExpression) {
         if (currentExpression.length <= 12) {
@@ -40,7 +40,7 @@ fun CalculatorDisplay(
 
     ConstraintLayout(
         modifier = modifier
-            .wrapContentHeight()
+            .wrapContentHeight(),
     ) {
         val (tvCalculationResult, tvCurrentExpression) = createRefs()
         TextField(
@@ -67,9 +67,9 @@ fun CalculatorDisplay(
                 focusedContainerColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
-                cursorColor = NumeraAppTheme.colorSchema.colorOnSurfacePrimary
+                cursorColor = NumeraAppTheme.colorSchema.colorOnSurfacePrimary,
             ),
-            visualTransformation = ArithmeticVisualTransformation()
+            visualTransformation = ArithmeticVisualTransformation(),
         )
 
         TextField(
@@ -88,16 +88,16 @@ fun CalculatorDisplay(
             singleLine = true,
             textStyle = NumeraAppTheme.typography.light36.copy(
                 color = NumeraAppTheme.colorSchema.colorOnSurfacePrimary,
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
             ),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.Transparent,
                 focusedContainerColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
-                cursorColor = NumeraAppTheme.colorSchema.colorOnSurfacePrimary
+                cursorColor = NumeraAppTheme.colorSchema.colorOnSurfacePrimary,
             ),
-            visualTransformation = ArithmeticVisualTransformation()
+            visualTransformation = ArithmeticVisualTransformation(),
         )
     }
 }
@@ -111,7 +111,7 @@ private fun CalculatorDisplayPreview() {
                 .fillMaxWidth()
                 .fillMaxHeight(0.3f),
             calculationResult = "1255",
-            currentExpression = "6291÷5"
+            currentExpression = "6291÷5",
         )
     }
 }
@@ -163,14 +163,19 @@ class ArithmeticVisualTransformation : VisualTransformation {
         return TransformedText(AnnotatedString(transformedText), offsetMapping)
     }
 
-
     private fun formatNumber(number: String): String {
         val parts = number.split(".", limit = 2)
         val integerPart = parts[0].let {
             if (it.isEmpty()) "0" else it
         }.reversed().chunked(3).joinToString(",").reversed()
         val decimalPart =
-            if (parts.size > 1) "." + parts[1] else if (number.endsWith(".")) "." else ""
+            if (parts.size > 1) {
+                "." + parts[1]
+            } else if (number.endsWith(".")) {
+                "."
+            } else {
+                ""
+            }
         return integerPart + decimalPart
     }
 

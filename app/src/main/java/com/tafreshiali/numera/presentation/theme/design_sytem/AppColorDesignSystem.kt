@@ -12,7 +12,7 @@ data class AppColorSchema(
     val colorMediumEmphasisSurface: Color,
     val colorMediumEmphasisOnSurface: Color,
     val colorLowEmphasisSurface: Color,
-    val colorLowEmphasisOnSurface: Color
+    val colorLowEmphasisOnSurface: Color,
 )
 
 val LocalAppColorSchema = staticCompositionLocalOf {
@@ -25,6 +25,6 @@ val LocalAppColorSchema = staticCompositionLocalOf {
         colorMediumEmphasisSurface = Color.Unspecified,
         colorMediumEmphasisOnSurface = Color.Unspecified,
         colorLowEmphasisSurface = Color.Unspecified,
-        colorLowEmphasisOnSurface = Color.Unspecified
+        colorLowEmphasisOnSurface = Color.Unspecified,
     )
 }

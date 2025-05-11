@@ -10,13 +10,9 @@ import com.tafreshiali.numera.domain.model.ParenthesesType
  * term :		factor | factor * factor | factor / factor | factor % factor
  * factor : 	number | ( expression ) | + factor | − factor
  */
-class ExpressionEvaluator(
-    private val expression: List<ExpressionPart>
-) {
+class ExpressionEvaluator(private val expression: List<ExpressionPart>) {
 
-    fun evaluate(): Double {
-        return evalExpression(expression).value
-    }
+    fun evaluate(): Double = evalExpression(expression).value
 
     private fun evalExpression(expression: List<ExpressionPart>): ExpressionResult {
         val result = evalTerm(expression)
@@ -73,8 +69,8 @@ class ExpressionEvaluator(
     // A factor is either a number or an expression in parentheses
     // e.g. 5.0, -7.5, -(3+4*5)
     // But NOT something like 3 * 5, 4 + 5
-    private fun evalFactor(expression: List<ExpressionPart>): ExpressionResult {
-        return when (val part = expression.firstOrNull()) {
+    private fun evalFactor(expression: List<ExpressionPart>): ExpressionResult =
+        when (val part = expression.firstOrNull()) {
             ExpressionPart.Op(Operation.ADD) -> {
                 evalFactor(expression.drop(1))
             }
@@ -94,15 +90,11 @@ class ExpressionEvaluator(
             ExpressionPart.Op(Operation.PERCENT) -> evalTerm(expression.drop(1))
             is ExpressionPart.Number -> ExpressionResult(
                 remainingExpression = expression.drop(1),
-                value = part.number
+                value = part.number,
             )
 
             else -> throw RuntimeException("Invalid part")
         }
-    }
 
-    data class ExpressionResult(
-        val remainingExpression: List<ExpressionPart>,
-        val value: Double
-    )
+    data class ExpressionResult(val remainingExpression: List<ExpressionPart>, val value: Double)
 }

@@ -66,8 +66,11 @@ class ExpressionWriter {
         }
     }
 
-    private fun isCalculable(currentAction: CalculatorAction): Boolean =
-        (currentAction != CalculatorAction.Calculate || currentAction != CalculatorAction.Clear)
+    private fun isCalculable(currentAction: CalculatorAction): Boolean = (
+        currentAction !=
+            CalculatorAction.Calculate ||
+            currentAction != CalculatorAction.Clear
+        )
 
     private fun isValidExpression(): Boolean {
         val nonNumeric = expression.replace(Regex("[0-9.]"), "")
@@ -97,10 +100,10 @@ class ExpressionWriter {
         val closingCount = expression.count { it == ')' }
         expression += when {
             expression.isEmpty() ||
-                    expression.last() in "$operationSymbols(" -> "("
+                expression.last() in "$operationSymbols(" -> "("
 
             expression.last() in "0123456789)" &&
-                    openingCount == closingCount -> return
+                openingCount == closingCount -> return
 
             else -> ")"
         }
@@ -133,10 +136,9 @@ class ExpressionWriter {
         return lastExpressionChar in operationSymbols
     }
 
-    fun convertIfWholeNumber(value: Double): Any =
-        if (value % 1.0 == 0.0) {
-            value.toInt()
-        } else {
-            value
-        }
+    fun convertIfWholeNumber(value: Double): Any = if (value % 1.0 == 0.0) {
+        value.toInt()
+    } else {
+        value
+    }
 }

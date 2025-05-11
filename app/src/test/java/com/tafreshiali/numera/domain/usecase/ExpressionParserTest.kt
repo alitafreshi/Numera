@@ -12,71 +12,71 @@ class ExpressionParserTest {
 
     @Test
     fun `Plus expression is properly parsed`() {
-        //Given
+        // Given
         parser = ExpressionParser("3 + 5")
-        //When
+        // When
         val actual = parser.parse()
-        //Then
+        // Then
         val expected = listOf(
             ExpressionPart.Number(3.0),
             ExpressionPart.Op(Operation.ADD),
-            ExpressionPart.Number(5.0)
+            ExpressionPart.Number(5.0),
         )
         assertThat(expected).isEqualTo(actual)
     }
 
     @Test
     fun `Minus expression is properly parsed`() {
-        //Given
+        // Given
         parser = ExpressionParser("3 - 5")
-        //When
+        // When
         val actual = parser.parse()
-        //Then
+        // Then
         val expected = listOf(
             ExpressionPart.Number(3.0),
             ExpressionPart.Op(Operation.SUBTRACT),
-            ExpressionPart.Number(5.0)
+            ExpressionPart.Number(5.0),
         )
         assertThat(expected).isEqualTo(actual)
     }
 
     @Test
     fun `Multiply expression is properly parsed`() {
-        //Given
+        // Given
         parser = ExpressionParser("3 x 5")
-        //When
+        // When
         val actual = parser.parse()
-        //Then
+        // Then
         val expected = listOf(
             ExpressionPart.Number(3.0),
             ExpressionPart.Op(Operation.MULTIPLY),
-            ExpressionPart.Number(5.0)
-            )
+            ExpressionPart.Number(5.0),
+        )
         assertThat(expected).isEqualTo(actual)
     }
 
     @Test
     fun `Divide expression is properly parsed`() {
-        //Given
+        // Given
         parser = ExpressionParser("3 / 5")
-        //When
+        // When
         val actual = parser.parse()
-        //Then
+        // Then
         val expected = listOf(
             ExpressionPart.Number(3.0),
             ExpressionPart.Op(Operation.DIVIDE),
-            ExpressionPart.Number(5.0)
+            ExpressionPart.Number(5.0),
         )
         assertThat(expected).isEqualTo(actual)
     }
 
     @Test
     fun `Parentheses expression is properly parsed`() {
-        //Given
+        // Given
         parser = ExpressionParser("3 x (5 + 1)")
-        //When
+        // When
         val actual = parser.parse()
-        //Then
+        // Then
         val expected = listOf(
             ExpressionPart.Number(3.0),
             ExpressionPart.Op(Operation.MULTIPLY),
@@ -84,7 +84,7 @@ class ExpressionParserTest {
             ExpressionPart.Number(5.0),
             ExpressionPart.Op(Operation.ADD),
             ExpressionPart.Number(1.0),
-            ExpressionPart.Parentheses(ParenthesesType.Closing)
+            ExpressionPart.Parentheses(ParenthesesType.Closing),
         )
         assertThat(expected).isEqualTo(actual)
     }

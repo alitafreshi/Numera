@@ -31,7 +31,7 @@ private val darkColorSchema = AppColorSchema(
     colorMediumEmphasisSurface = colorDarkMediumEmphasisSurface,
     colorMediumEmphasisOnSurface = colorDarkOnSurfacePrimary,
     colorLowEmphasisSurface = colorDarkLowEmphasisSurface,
-    colorLowEmphasisOnSurface = colorDarkOnSurfacePrimary
+    colorLowEmphasisOnSurface = colorDarkOnSurfacePrimary,
 )
 
 private val lightColorSchema = AppColorSchema(
@@ -43,35 +43,35 @@ private val lightColorSchema = AppColorSchema(
     colorMediumEmphasisSurface = colorLightMediumEmphasisSurface,
     colorMediumEmphasisOnSurface = colorLightOnSurfacePrimary,
     colorLowEmphasisSurface = colorLightLowEmphasisSurface,
-    colorLowEmphasisOnSurface = colorLightOnSurfacePrimary
+    colorLowEmphasisOnSurface = colorLightOnSurfacePrimary,
 )
 
 private val typography = AppTypography(
     light25 = TextStyle(
         fontFamily = workSans,
         fontWeight = FontWeight.Light,
-        fontSize = 25.sp
+        fontSize = 25.sp,
     ),
     light40 = TextStyle(
         fontFamily = workSans,
         fontWeight = FontWeight.Light,
-        fontSize = 40.sp
+        fontSize = 40.sp,
     ),
     light36 = TextStyle(
         fontFamily = workSans,
         fontWeight = FontWeight.Light,
-        fontSize = 36.sp
+        fontSize = 36.sp,
     ),
     regular32 = TextStyle(
         fontFamily = workSans,
         fontWeight = FontWeight.Normal,
-        fontSize = 32.sp
-    )
+        fontSize = 32.sp,
+    ),
 )
 
 private val shape = AppShape(
     medium = RoundedCornerShape(10.dp),
-    large = RoundedCornerShape(24.dp)
+    large = RoundedCornerShape(24.dp),
 )
 
 data object NumeraAppTheme {
@@ -90,13 +90,13 @@ fun NumeraAppTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = if (isDarkTheme) darkColorSchema else lightColorSchema
     CompositionLocalProvider(
         LocalAppColorSchema provides colorScheme,
         LocalAppTypography provides typography,
         LocalAppShape provides shape,
-        content = content
+        content = content,
     )
 }

@@ -17,7 +17,6 @@ class ExpressionParser(private val calculation: String) {
                 currentCharacter in operationSymbols ->
                     result.add(ExpressionPart.Op(currentCharacter.operationFromSymbol()))
 
-
                 currentCharacter.isDigit() -> {
                     val (number, newIndex) = parseNumber(currentIndex)
                     result.add(number)
@@ -26,7 +25,6 @@ class ExpressionParser(private val calculation: String) {
                 }
 
                 currentCharacter in "()" -> result.add(parseParentheses(currentCharacter))
-
             }
             currentIndex++
         }
@@ -42,7 +40,13 @@ class ExpressionParser(private val calculation: String) {
             when {
                 currentCharacter.isDigit() -> currentIndex++
                 currentCharacter == '.' -> {
-                    if (dotCount == 1) throw IllegalArgumentException("Decimal number with Multiple decimal points is invalid")  // Stop if multiple decimal points appear
+                    if (dotCount ==
+                        1
+                    ) {
+                        throw IllegalArgumentException(
+                            "Decimal number with Multiple decimal points is invalid",
+                        ) // Stop if multiple decimal points appear
+                    }
                     dotCount++
                     currentIndex++
                 }
@@ -61,6 +65,6 @@ class ExpressionParser(private val calculation: String) {
                 '(' -> ParenthesesType.Opening
                 ')' -> ParenthesesType.Closing
                 else -> throw IllegalArgumentException("Invalid parentheses type")
-            }
+            },
         )
 }

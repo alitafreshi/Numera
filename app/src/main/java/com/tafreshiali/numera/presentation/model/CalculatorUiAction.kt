@@ -7,7 +7,7 @@ data class CalculatorUiAction(
     val text: String?,
     val highlightLevel: HighlightLevel,
     val action: CalculatorAction,
-    val content: @Composable () -> Unit = {}
+    val content: @Composable () -> Unit = {},
 )
 
 sealed interface HighlightLevel {

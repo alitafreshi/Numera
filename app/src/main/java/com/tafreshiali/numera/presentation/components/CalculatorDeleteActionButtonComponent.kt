@@ -18,7 +18,7 @@ import kotlinx.coroutines.isActive
 fun CalculatorDeleteActionButtonComponent(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
 ) {
     var isDeleting by remember { mutableStateOf(false) }
 
@@ -43,10 +43,10 @@ fun CalculatorDeleteActionButtonComponent(
                         isDeleting = true
                         tryAwaitRelease()
                         isDeleting = false
-                    }
+                    },
                 )
             },
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         content()
     }

@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -32,16 +31,17 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 fun CalculatorActionButtonComponent(
     modifier: Modifier = Modifier,
     uiAction: CalculatorUiAction,
-    onClick: (CalculatorAction) -> Unit
+    onClick: (CalculatorAction) -> Unit,
 ) {
     val defaultModifier = modifier
         .clip(RoundedCornerShape(30.dp))
         .background(
             color = when (uiAction.highlightLevel) {
                 HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisSurface
-                HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisSurface
+                HighlightLevel.MediumEmphasis ->
+                    NumeraAppTheme.colorSchema.colorMediumEmphasisSurface
                 HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisSurface
-            }
+            },
         )
         .semantics {
             contentDescription = when (uiAction.action) {
@@ -64,16 +64,15 @@ fun CalculatorActionButtonComponent(
             if (isScaled) {
                 isScaled = false
             }
-        }
+        },
     )
 
     if (uiAction.action == CalculatorAction.Delete) {
         CalculatorDeleteActionButtonComponent(
             modifier = defaultModifier,
             onDeleteClick = { onClick(uiAction.action) },
-            content = uiAction.content
+            content = uiAction.content,
         )
-
     } else {
         Box(
             modifier = defaultModifier
@@ -81,7 +80,7 @@ fun CalculatorActionButtonComponent(
                     isScaled = true
                     onClick(uiAction.action)
                 },
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             when {
                 uiAction.text != null -> {
@@ -89,13 +88,16 @@ fun CalculatorActionButtonComponent(
                         text = uiAction.text,
                         style = NumeraAppTheme.typography.regular32,
                         color = when (uiAction.highlightLevel) {
-                            HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisOnSurface
-                            HighlightLevel.MediumEmphasis -> NumeraAppTheme.colorSchema.colorMediumEmphasisOnSurface
-                            HighlightLevel.LowEmphasis -> NumeraAppTheme.colorSchema.colorLowEmphasisOnSurface
+                            HighlightLevel.HighEmphasis ->
+                                NumeraAppTheme.colorSchema.colorHighEmphasisOnSurface
+                            HighlightLevel.MediumEmphasis ->
+                                NumeraAppTheme.colorSchema.colorMediumEmphasisOnSurface
+                            HighlightLevel.LowEmphasis ->
+                                NumeraAppTheme.colorSchema.colorLowEmphasisOnSurface
                         },
                         textAlign = TextAlign.Center,
                         maxLines = 1,
-                        modifier = Modifier.graphicsLayer(scaleX = scale, scaleY = scale)
+                        modifier = Modifier.graphicsLayer(scaleX = scale, scaleY = scale),
                     )
                 }
 
@@ -118,9 +120,9 @@ private fun CalculatorActionButtonComponentPreview() {
                 action = CalculatorAction.Delete,
                 content = {
                     Text(text = "Delete")
-                }
+                },
             ),
-            onClick = {}
+            onClick = {},
         )
     }
 }
