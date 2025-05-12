@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Get the list of staged files
+stagedFiles=$(git diff --cached --name-only)
+
+# Run spotlessKotlinCheck
+./gradlew spotlessKotlinCheck
+checkStatus=$?
+
+if [ $checkStatus -eq 0 ]; then
+    # Check passed, allow commit
+    exit 0
+else
+    # Check failed, run spotlessKotlinApply
+    ./gradlew spotlessKotlinApply
+    applyStatus=$?
+
+    if [ $applyStatus -ne 0 ]; then
+        # Apply failed, prevent commit
+        echo "spotlessKotlinApply failed"
+        exit 1
+    else
+        # Apply succeeded, stage the changes for staged files
+        for file in $stagedFiles; do
+            if test -f "$file"; then
+                git add "$file"
+            fi
+        done
+        # Allow commit
+        exit 0
+    fi
+fi

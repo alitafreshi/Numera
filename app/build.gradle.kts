@@ -59,6 +59,18 @@ spotless {
     }
 }
 
+tasks.register<Copy>("copyPreCommitHook") {
+    description = "Copy pre-commit hook from the scripts folder into .git/hooks directory"
+    group = "git hooks"
+    //Always Copy the pre-commit file into .git/hooks directory to prevent issues
+    outputs.upToDateWhen { false }
+    from("$rootDir/git-hooks/pre-commit")
+    into("$rootDir/.git/hooks/")
+}
+tasks.preBuild {
+    dependsOn("copyPreCommitHook")
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
