@@ -27,6 +27,8 @@ fun CalculatorDisplay(
     modifier: Modifier = Modifier,
     currentExpression: String,
     calculationResult: String,
+    isDarkTheme: Boolean,
+    updateTheme: () -> Unit,
 ) {
     val currentExpressionFontSize = remember(currentExpression) {
         if (currentExpression.length <= 12) {
@@ -42,14 +44,25 @@ fun CalculatorDisplay(
         modifier = modifier
             .wrapContentHeight(),
     ) {
-        val (tvCalculationResult, tvCurrentExpression) = createRefs()
+        val (tvCalculationResult, tvCurrentExpression, themeSwitcherComponent) = createRefs()
+
+        ThemeSwitcherComponent(
+            modifier = Modifier.constrainAs(themeSwitcherComponent) {
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            },
+            isDarkTheme = isDarkTheme,
+            updateTheme = updateTheme,
+        )
+
         TextField(
             value = currentExpression,
             onValueChange = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .constrainAs(tvCurrentExpression) {
-                    top.linkTo(parent.top)
+                    top.linkTo(themeSwitcherComponent.bottom)
                 }
                 .semantics {
                     contentDescription = "tvCurrentExpression"
@@ -112,6 +125,8 @@ private fun CalculatorDisplayPreview() {
                 .fillMaxHeight(0.3f),
             calculationResult = "1255",
             currentExpression = "6291÷5",
+            isDarkTheme = false,
+            updateTheme = {},
         )
     }
 }

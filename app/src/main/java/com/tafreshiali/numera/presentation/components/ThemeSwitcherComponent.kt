@@ -2,13 +2,16 @@ package com.tafreshiali.numera.presentation.components
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -26,18 +29,27 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
-fun ThemeSwitcherComponent(modifier: Modifier = Modifier) {
+fun ThemeSwitcherComponent(
+    modifier: Modifier = Modifier,
+    isDarkTheme: Boolean,
+    updateTheme: () -> Unit,
+) {
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth(0.2f)
             .wrapContentHeight()
-            .background(color = NumeraAppTheme.colorSchema.colorLowEmphasisSurface, CircleShape),
-        contentAlignment = Alignment.Center,
+            .background(color = NumeraAppTheme.colorSchema.colorLowEmphasisSurface, CircleShape)
+            .clickable(onClick = updateTheme),
+        contentAlignment = Alignment.CenterStart,
     ) {
-        val maxWidthDp = constraints.maxWidth.dp
         val thumbAnim by animateDpAsState(
-            targetValue = maxWidthDp,
-            finishedListener = {},
+            targetValue = if (isDarkTheme) 0.dp + 5.dp else maxWidth - (24 * 1.3).dp,
+            finishedListener = {
+                Log.d(
+                    "THEMESWITCHER",
+                    "hasBoundedWidth is ${constraints.hasBoundedWidth} and the max width is $maxWidth",
+                )
+            },
         )
         Row(
             modifier = Modifier
@@ -62,6 +74,7 @@ fun ThemeSwitcherComponent(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .size(24.dp)
+                .offset(x = thumbAnim)
                 .background(
                     color = NumeraAppTheme.colorSchema.colorMediumEmphasisSurface,
                     CircleShape,
@@ -78,6 +91,6 @@ fun ThemeSwitcherComponent(modifier: Modifier = Modifier) {
 @Composable
 private fun ThemeSwitcherComponentPreview() {
     NumeraAppTheme {
-        ThemeSwitcherComponent()
+        ThemeSwitcherComponent(isDarkTheme = false, updateTheme = {})
     }
 }
