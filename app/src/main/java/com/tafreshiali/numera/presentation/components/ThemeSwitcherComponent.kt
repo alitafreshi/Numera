@@ -1,7 +1,5 @@
 package com.tafreshiali.numera.presentation.components
 
-import android.R.attr.maxWidth
-import android.R.attr.thumbOffset
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.animation.core.animateDpAsState
