@@ -25,7 +25,7 @@ fun CalculatorMainScreen(
     viewModel: CalculatorViewModel = viewModel(),
 ) {
     var theme by remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
     Column(
         modifier = modifier
