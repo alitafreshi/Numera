@@ -28,7 +28,7 @@ fun CalculatorDisplay(
     currentExpression: String,
     calculationResult: String,
     isDarkTheme: Boolean,
-    updateTheme: () -> Unit,
+    updateTheme: (Boolean) -> Unit,
 ) {
     val currentExpressionFontSize = remember(currentExpression) {
         if (currentExpression.length <= 12) {

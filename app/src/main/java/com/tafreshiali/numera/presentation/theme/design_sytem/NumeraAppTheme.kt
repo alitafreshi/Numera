@@ -4,6 +4,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -86,13 +89,12 @@ data object NumeraAppTheme {
 }
 
 @Composable
-fun NumeraAppTheme(
-    isDarkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit,
-) {
-    val colorScheme = if (isDarkTheme) darkColorSchema else lightColorSchema
+fun NumeraAppTheme(isDarkTheme: Boolean? = null, content: @Composable () -> Unit) {
+    val colorScheme =
+        if (isDarkTheme ?: isSystemInDarkTheme()) darkColorSchema else lightColorSchema
+
+    LaunchedEffect(isDarkTheme) {
+    }
     CompositionLocalProvider(
         LocalAppColorSchema provides colorScheme,
         LocalAppTypography provides typography,
