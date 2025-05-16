@@ -7,7 +7,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tafreshiali.numera.R
 import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
+import com.tafreshiali.numera.presentation.utils.clickableWithoutRipple
 import kotlin.math.hypot
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
@@ -90,7 +91,7 @@ fun ThemeSwitcherComponent(
             }
             .background(color = NumeraAppTheme.colorSchema.colorLowEmphasisSurface, CircleShape)
             .clip(CircleShape)
-            .clickable {
+            .clickableWithoutRipple(interactionSource = remember { MutableInteractionSource() }) {
                 updateTheme(!isDarkTheme)
             }
             .padding(vertical = 4.dp),
