@@ -25,7 +25,6 @@ fun CalculatorMainScreen(
     Column(
         modifier = modifier
             .fillMaxSize(),
-        /*.background(NumeraAppTheme.colorSchema.colorSurface)*/
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         CalculatorDisplay(

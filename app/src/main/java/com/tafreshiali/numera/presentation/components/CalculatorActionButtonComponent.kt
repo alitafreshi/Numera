@@ -34,7 +34,7 @@ fun CalculatorActionButtonComponent(
     onClick: (CalculatorAction) -> Unit,
 ) {
     val defaultModifier = modifier
-        .clip(RoundedCornerShape(30.dp))
+        .clip(RoundedCornerShape(24.dp))
         .background(
             color = when (uiAction.highlightLevel) {
                 HighlightLevel.HighEmphasis -> NumeraAppTheme.colorSchema.colorHighEmphasisSurface
