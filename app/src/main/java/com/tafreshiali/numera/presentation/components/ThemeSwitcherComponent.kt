@@ -52,7 +52,7 @@ fun ThemeSwitcherComponent(
 
     val themeCircleRivalAnimation by animateDpAsState(
         targetValue = if (!isDarkTheme) maxRadius else 0.dp,
-        animationSpec = tween(durationMillis = 1000, easing = LinearEasing),
+        animationSpec = tween(durationMillis = 200, easing = LinearEasing),
         label = "rippleRadius",
     )
 
@@ -60,7 +60,7 @@ fun ThemeSwitcherComponent(
 
     val color by animateColorAsState(
         targetValue = NumeraAppTheme.colorSchema.colorSurface,
-        animationSpec = tween(durationMillis = 2000, easing = LinearEasing),
+        animationSpec = tween(durationMillis = 200, easing = LinearEasing),
         label = "color",
     )
 
