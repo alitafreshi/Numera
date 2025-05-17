@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.2"
+agp = "8.9.3"
 kotlin = "2.1.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -13,6 +13,7 @@ composeNavigation = "2.9.0"
 splash ="1.0.1"
 googleTruth = "1.4.4"
 ktlint = "7.0.3"
+
 
 
 
