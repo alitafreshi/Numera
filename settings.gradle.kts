@@ -25,3 +25,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Numera"
 include(":app")
+include(":core")
+include(":core:proto-data-store")
