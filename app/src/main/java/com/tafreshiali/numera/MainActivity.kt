@@ -15,7 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.tafreshiali.numera.presentation.CalculatorMainScreen
 import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
