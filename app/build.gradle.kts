@@ -105,5 +105,5 @@ dependencies {
 
     //proto data store
     implementation(libs.proto.data.store.androidx)
-    implementation(project(":core:proto-data-store"))
+    implementation(projects.core.protoDataStore)
 }
