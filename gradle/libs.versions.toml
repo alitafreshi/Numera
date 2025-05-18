@@ -14,8 +14,11 @@ splash = "1.0.1"
 googleTruth = "1.4.4"
 ktlint = "7.0.3"
 dagger-hilt = "2.56.2"
-ksp = "2.1.21-2.0.1"
-jetbrainsKotlinJvm = "2.1.0"
+ksp = "2.1.0-1.0.29"
+data-store = "1.1.6"
+kotlinx-json-serialization = "1.8.1"
+kotlinx-collections-immutable = "0.4.0"
+javax-inject = "1"
 
 
 
@@ -42,6 +45,11 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 google-truth = { group = "com.google.truth", name = "truth", version.ref = "googleTruth" }
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger-hilt" }
+proto-data-store-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "data-store" }
+proto-data-store-androidx = { group = "androidx.datastore", name = "datastore", version.ref = "data-store" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-json-serialization" }
+koltinx-collections = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
+javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javax-inject" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -50,4 +58,5 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 ktlint = { id = "com.diffplug.spotless", version.ref = "ktlint" }
 dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

@@ -102,4 +102,8 @@ dependencies {
     //dagger hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
+
+    //proto data store
+    implementation(libs.proto.data.store.androidx)
+    implementation(project(":core:proto-data-store"))
 }
