@@ -4,10 +4,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.tafreshiali.domain.AppProtoDataStore
+import com.tafreshiali.domain.model.AppSettings
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.usecase.ExpressionWriter
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CalculatorViewModel(private val writer: ExpressionWriter = ExpressionWriter()) : ViewModel() {
+@HiltViewModel
+class CalculatorViewModel @Inject constructor(
+    private val dataStore: AppProtoDataStore<AppSettings>,
+) : ViewModel() {
+
+    private var writer: ExpressionWriter = ExpressionWriter()
 
     var result by mutableStateOf("")
         private set
@@ -19,5 +30,11 @@ class CalculatorViewModel(private val writer: ExpressionWriter = ExpressionWrite
         writer.processAction(action)
         expression = writer.expression
         result = writer.calculationResult
+    }
+
+    fun updateTheme(isDarkTheme: Boolean) {
+        viewModelScope.launch {
+            dataStore.setValue(AppSettings(selectedTheme = isDarkTheme))
+        }
     }
 }

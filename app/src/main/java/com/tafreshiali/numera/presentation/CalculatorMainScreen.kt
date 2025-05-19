@@ -19,7 +19,6 @@ import com.tafreshiali.numera.presentation.theme.design_sytem.NumeraAppTheme
 fun CalculatorMainScreen(
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean,
-    updateTheme: (Boolean) -> Unit,
     viewModel: CalculatorViewModel = viewModel(),
 ) {
     Column(
@@ -34,7 +33,9 @@ fun CalculatorMainScreen(
             currentExpression = viewModel.expression,
             calculationResult = viewModel.result,
             isDarkTheme = isDarkTheme,
-            updateTheme = updateTheme,
+            updateTheme = {
+                viewModel.updateTheme(it)
+            },
         )
 
         CalculatorActionButtonsGridComponent(
@@ -52,7 +53,6 @@ private fun CalculatorMainScreenPreview() {
         CalculatorMainScreen(
             modifier = Modifier.fillMaxSize(),
             isDarkTheme = isSystemInDarkTheme(),
-            updateTheme = {},
         )
     }
 }
