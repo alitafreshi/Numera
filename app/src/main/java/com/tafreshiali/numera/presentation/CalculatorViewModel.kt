@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tafreshiali.domain.AppProtoDataStore
 import com.tafreshiali.domain.model.AppSettings
+import com.tafreshiali.numera.domain.expression_writer.ExpressionWriter
 import com.tafreshiali.numera.domain.model.CalculatorAction
-import com.tafreshiali.numera.domain.usecase.ExpressionWriter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

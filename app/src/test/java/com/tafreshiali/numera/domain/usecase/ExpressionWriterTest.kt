@@ -1,6 +1,7 @@
 package com.tafreshiali.numera.domain.usecase
 
 import com.google.common.truth.Truth.assertThat
+import com.tafreshiali.numera.domain.expression_writer.ExpressionWriter
 import com.tafreshiali.numera.domain.model.CalculatorAction
 import com.tafreshiali.numera.domain.model.Operation
 import org.junit.Before
