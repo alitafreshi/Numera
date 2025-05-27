@@ -3,6 +3,7 @@ package com.tafreshiali.numera.domain.usecase
 import com.tafreshiali.numera.domain.model.ExpressionPart
 import com.tafreshiali.numera.domain.model.Operation
 import com.tafreshiali.numera.domain.model.ParenthesesType
+import kotlin.math.roundToLong
 
 /**
  * Uses the following grammar
@@ -12,7 +13,10 @@ import com.tafreshiali.numera.domain.model.ParenthesesType
  */
 class ExpressionEvaluator(private val expression: List<ExpressionPart>) {
 
-    fun evaluate(): Double = evalExpression(expression).value
+    fun evaluate(): Double {
+        val rawValue = evalExpression(expression).value
+        return (rawValue * 1000.0).roundToLong() / 1000.0
+    }
 
     private fun evalExpression(expression: List<ExpressionPart>): ExpressionResult {
         val result = evalTerm(expression)
