@@ -7,7 +7,6 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.dataStoreFile
 import com.tafreshiali.domain.AppProtoDataStore
 import com.tafreshiali.domain.model.AppSettings
-import com.tafreshiali.numera.NumeraApplication
 import com.tafreshiali.repository.AppProtoDataStoreImpl
 import com.tafreshiali.serializer.GenericProtoDataStoreSerializer
 import dagger.Module
@@ -45,11 +44,6 @@ object DataStoreModule {
              ),
              produceFile = { app.preferencesDataStoreFile(name = Constance.APP_DATABASE) }
          )*/
-
-    @Singleton
-    @Provides
-    fun provideApplicationContext(@ApplicationContext app: Context): NumeraApplication =
-        app as NumeraApplication
 
     @Singleton
     @Provides
